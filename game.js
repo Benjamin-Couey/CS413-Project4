@@ -40,6 +40,9 @@ var player;
 // A reference to the tile world that will be used by several functions
 var world;
 
+// A reference to the map state
+var mapState = "Map0";
+
 // A reference to a layer for entites
 var entity_layer;
 
@@ -397,22 +400,66 @@ function bound( sprite )
   if( sprite.position.x + sprite.anchor.x * 32 < 0)
   {
     sprite.position.x = sprite.anchor.x * 32;
-    changeWorld("map2.json");
+    switch(mapState)
+    {
+        case "Map0":
+        changeWorld("map2.json");
+        mapState = "Map1";
+        break;
+        
+        case "Map1":
+        changeWorld("map.json");
+        mapState = "Map0";
+        break;
+    }
   }
   else if( sprite.position.x + sprite.anchor.x * 32 > world.worldWidth )
   {
     sprite.position.x = world.worldWidth - sprite.anchor.x * 32;
-    changeWorld("map2.json");
+    switch(mapState)
+    {
+        case "Map0":
+        changeWorld("map2.json");
+        mapState = "Map1";
+        break;
+        
+        case "Map1":
+        changeWorld("map.json");
+        mapState = "Map0";
+        break;
+    }
   }
   if( sprite.position.y + sprite.anchor.y * 32 < 0 )
   {
     sprite.position.y = sprite.anchor.y * 32;
-    changeWorld("map2.json");
+    switch(mapState)
+    {
+        case "Map0":
+        changeWorld("map2.json");
+        mapState = "Map1";
+        break;
+        
+        case "Map1":
+        changeWorld("map.json");
+        mapState = "Map0";
+        break;
+    }
   }
   else if( sprite.position.y + sprite.anchor.y * 32 > world.worldHeight )
   {
     sprite.position.y = world.worldHeight - sprite.anchor.y * 32;
-    changeWorld("map2.json");
+    switch(mapState)
+    {
+        case "Map0":
+        changeWorld("map2.json");
+        mapState = "Map1";
+        break;
+        
+        case "Map1":
+        changeWorld("map.json");
+        mapState = "Map0";
+        break;
+    }
   }
 }
 
@@ -444,6 +491,7 @@ function changeWorld(name)
   // Add player to map's entity layer
   entity_layer = world.getObject("Entities");
   entity_layer.addChild(player.sprite);
+  entity_layer.addChild(player.playerBody);
 
   //Add in the collidable objects to our collision array
   collidableArray = world.getObject("WallsLayer").data;
