@@ -26,7 +26,7 @@
             </struct>
         </array>
         <key>allowRotation</key>
-        <false/>
+        <true/>
         <key>shapeDebug</key>
         <false/>
         <key>dpi</key>
@@ -132,7 +132,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename></filename>
+                <filename>Assets.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -181,38 +181,29 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">Assets/AttackAnim1.png</key>
-            <key type="filename">Assets/AttackAnim2.png</key>
-            <key type="filename">Assets/AttackAnim3.png</key>
-            <key type="filename">Assets/AttackAnim4.png</key>
+            <key type="filename">Assets/8thnote.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>8,2,16,4</rect>
+                <rect>4,4,8,8</rect>
                 <key>scale9Paddings</key>
-                <rect>8,2,16,4</rect>
+                <rect>4,4,8,8</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">Assets/Beetle.png</key>
-            <key type="filename">Assets/Player1.png</key>
-            <key type="filename">Assets/Player2.png</key>
-            <key type="filename">Assets/Player3.png</key>
-            <key type="filename">Assets/Player4.png</key>
-            <key type="filename">Assets/Snake.png</key>
-            <key type="filename">Assets/Spear.png</key>
+            <key type="filename">Assets/8thnotes.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>8,8,16,16</rect>
+                <rect>5,4,10,8</rect>
                 <key>scale9Paddings</key>
-                <rect>8,8,16,16</rect>
+                <rect>5,4,10,8</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -226,6 +217,46 @@
                 <rect>16,10,33,19</rect>
                 <key>scale9Paddings</key>
                 <rect>16,10,33,19</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Assets/PlayerBody1.png</key>
+            <key type="filename">Assets/PlayerBody2.png</key>
+            <key type="filename">Assets/PlayerBody3.png</key>
+            <key type="filename">Assets/PlayerBody4.png</key>
+            <key type="filename">Assets/PlayerBody5.png</key>
+            <key type="filename">Assets/PlayerBody6.png</key>
+            <key type="filename">Assets/PlayerBody7.png</key>
+            <key type="filename">Assets/PlayerBody8.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>5,6,9,12</rect>
+                <key>scale9Paddings</key>
+                <rect>5,6,9,12</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Assets/Snake1.png</key>
+            <key type="filename">Assets/Snake2.png</key>
+            <key type="filename">Assets/Snake3.png</key>
+            <key type="filename">Assets/Snake4.png</key>
+            <key type="filename">Assets/Snake5.png</key>
+            <key type="filename">Assets/Snake6.png</key>
+            <key type="filename">Assets/Snake7.png</key>
+            <key type="filename">Assets/Snake8.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>8,8,16,16</rect>
+                <key>scale9Paddings</key>
+                <rect>8,8,16,16</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -252,6 +283,19 @@
                 <rect>37,12,73,24</rect>
                 <key>scale9Paddings</key>
                 <rect>37,12,73,24</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">Assets/barrier.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>10,10,20,20</rect>
+                <key>scale9Paddings</key>
+                <rect>10,10,20,20</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>

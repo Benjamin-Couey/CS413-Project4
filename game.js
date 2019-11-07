@@ -138,6 +138,7 @@ function initializeSprites()
   // Add player to map's entity layer
   var entity_layer = world.getObject("Entities");
   entity_layer.addChild(player.sprite);
+  entity_layer.addChild(player.playerBody);
 
   //Add in the collidable objects to our collision array
   collidableArray = world.getObject("WallsLayer").data;
@@ -200,10 +201,28 @@ function player()
   // Get a reference to the player object in the entities layer of the map
   var stgPlayer = world.getObject("Player");
 
-  // Create the player's sprite
-  this.sprite = new PIXI.Sprite( sheet.textures["Player1.png"] );
+  // Create the player's 'hitbox' sprite
+  // This sprite will be invisible and will be used to check collision for the
+  // player with walls, enemies, etc.
+  this.sprite = new PIXI.Sprite( sheet.textures["PlayerBody1.png"] );
+  this.sprite.visible = false;
+
+  // Create the player's visible body
+  var frames = [];
+  for( let index = 1; index < 9; index++ )
+  {
+    frames.push( sheet.textures["PlayerBody" + index + ".png"] );
+  }
+  this.playerBody = new PIXI.AnimatedSprite( frames );
+  this.playerBody.anchor.set(0.5);
+  this.playerBody.animationSpeed = 0.2;
+
+  // Place the player on the map
   this.sprite.x = stgPlayer.x;
   this.sprite.y = stgPlayer.y;
+
+  this.playerBody.x = this.sprite.x + this.sprite.width / 2;
+  this.playerBody.y = this.sprite.y + this.sprite.height / 2;
 
   // Instance variables
   this.vx = 0;
@@ -296,13 +315,11 @@ function movePlayer()
     // W key
     if (wDown) {
       player.vy = -1;
-      player.sprite.texture = sheet.textures["Player3.png"]
     }
 
     // S key
     else if (sDown) {
     	player.vy = 1;
-      player.sprite.texture = sheet.textures["Player1.png"]
     }
 
     else {
@@ -313,17 +330,21 @@ function movePlayer()
     // A key
     if (aDown) {
       player.vx = -1;
-      player.sprite.texture = sheet.textures["Player4.png"]
     }
 
     // D key
     else if (dDown) {
       player.vx = 1;
-      player.sprite.texture = sheet.textures["Player2.png"]
     }
 
     else {
       player.vx = 0;
+    }
+
+    // If the player is moving, rotate their body to reflect the direction they are moving
+    if( player.vx != 0 || player.vy != 0) {
+    player.playerBody.rotation = Math.atan2( ( player.sprite.y + player.vy * PLAYERSPEED ) - player.sprite.y,
+                                       ( player.sprite.x + player.vx * PLAYERSPEED ) - player.sprite.x );
     }
 
     // Actually move the player
@@ -339,6 +360,17 @@ function movePlayer()
       player.sprite.y -= player.vy * PLAYERSPEED;
       player.vx = 0;
       player.vy = 0;
+    }
+
+    player.playerBody.x = player.sprite.x + player.sprite.width / 2;
+    player.playerBody.y = player.sprite.y + player.sprite.height / 2;
+
+    // Check if the player is moving, and if so, animate their sprite
+    if( player.vx == 0 && player.vy == 0) {
+      player.playerBody.stop();
+    }
+    else {
+      player.playerBody.play();
     }
 
 }
