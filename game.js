@@ -40,6 +40,9 @@ var player;
 // A reference to the tile world that will be used by several functions
 var world;
 
+// A reference to a layer for entites
+var entity_layer;
+
 // A reference to the collidable objects in the world
 var collidableArray;
 
@@ -111,7 +114,11 @@ console.log("Start initialization");
 PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
 
 // Load sprite sheet with all game's sprites
-PIXI.loader.add("Assets.json").add("map.json").add("tileset.png").load( initializeSprites );
+PIXI.loader.add("Assets.json")
+            .add("map.json")
+            .add("map2.json")
+            .add("tileset.png")
+            .load( initializeSprites );
 
 // Create the sprites that will be used in every biome
 // The large title, help, and game over screen sprites are bigger than this whole
@@ -123,6 +130,7 @@ function initializeSprites()
 
   //Get a reference to the tile map and add it to the stage
   world = tu.makeTiledWorld("map.json", "tileset.png");
+
   console.log("World parameters");
   console.log( world.tilewidth );
   console.log( world.tileheight );
@@ -133,10 +141,10 @@ function initializeSprites()
   sheet = PIXI.loader.resources["Assets.json"];
 
   // Create the player
-  player = new player();
+  player = new playerInit();
 
   // Add player to map's entity layer
-  var entity_layer = world.getObject("Entities");
+  entity_layer = world.getObject("Entities");
   entity_layer.addChild(player.sprite);
   entity_layer.addChild(player.playerBody);
 
@@ -196,7 +204,7 @@ function initializeSprites()
 
 // -------------------- Objects --------------------
 
-function player()
+function playerInit()
 {
   // Get a reference to the player object in the entities layer of the map
   var stgPlayer = world.getObject("Player");
@@ -386,21 +394,25 @@ function bound( sprite )
 {
   // Given a sprite, make sure that it stays within the bounds of the screen
   // Accounts for the sprites anchor position to keep the entirety of the sprite in bounds
-  if( sprite.position.x < sprite.anchor.x * 32 )
+  if( sprite.position.x + sprite.anchor.x * 32 < 0)
   {
     sprite.position.x = sprite.anchor.x * 32;
+    changeWorld("map2.json");
   }
   else if( sprite.position.x + sprite.anchor.x * 32 > world.worldWidth )
   {
     sprite.position.x = world.worldWidth - sprite.anchor.x * 32;
+    changeWorld("map2.json");
   }
-  if( sprite.position.y < sprite.anchor.y * 32 )
+  if( sprite.position.y + sprite.anchor.y * 32 < 0 )
   {
     sprite.position.y = sprite.anchor.y * 32;
+    changeWorld("map2.json");
   }
   else if( sprite.position.y + sprite.anchor.y * 32 > world.worldHeight )
   {
     sprite.position.y = world.worldHeight - sprite.anchor.y * 32;
+    changeWorld("map2.json");
   }
 }
 
@@ -410,6 +422,36 @@ function boundObjects()
   bound( player.sprite );
 }
 
+function changeWorld(name)
+{
+  //Get a reference to the tile map and add it to the stage
+  stage.removeChild(world);
+
+  console.log("World parameters");
+  console.log( name );
+  console.log( world.tilewidth );
+  console.log( world.tileheight );
+  console.log( world.widthInTiles );
+
+  world = tu.makeTiledWorld(name, "tileset.png");
+  
+  stage.addChild(world);
+
+  // Create the player again
+  player = new playerInit();
+  player.sprite.visible = true;
+
+  // Add player to map's entity layer
+  entity_layer = world.getObject("Entities");
+  entity_layer.addChild(player.sprite);
+
+  //Add in the collidable objects to our collision array
+  collidableArray = world.getObject("WallsLayer").data;
+  
+  loadGame();
+  
+  gameLoop();
+}
 
 
 // -------------------- Main game loop --------------------
