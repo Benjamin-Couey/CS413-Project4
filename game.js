@@ -37,6 +37,11 @@ var dDown = false;
 // these will be filled, emptied, and modified as new screens are loaded
 var player;
 
+var snakes = [];
+
+// A reference to the Tile Utilities
+var tu;
+
 // A reference to the tile world that will be used by several functions
 var world;
 
@@ -46,11 +51,10 @@ var entity_layer;
 // A reference to the collidable objects in the world
 var collidableArray;
 
-// a reference to the spritesheet
+// A reference to the spritesheet
 var sheet;
 
-//Global Tile Utilities
-var tu;
+
 
 // ---------- PIXI.js boiler plate code
 var gameport = document.getElementById("gameport");
@@ -140,13 +144,17 @@ function initializeSprites()
   // Get a reference to the spritesheet
   sheet = PIXI.loader.resources["Assets.json"];
 
+  // Get a reference to the map's entity layer
+  entity_layer = world.getObject("Entities");
+
   // Create the player
   player = new playerInit();
 
   // Add player to map's entity layer
-  entity_layer = world.getObject("Entities");
   entity_layer.addChild(player.sprite);
   entity_layer.addChild(player.playerBody);
+
+  snakeInit();
 
   //Add in the collidable objects to our collision array
   collidableArray = world.getObject("WallsLayer").data;
@@ -238,6 +246,67 @@ function playerInit()
   this.moving = false;
 }
 
+function snakeInit()
+{
+  // Get an array of references to all the snake objects in the entities layer
+  // of the map
+  var stgSnake = world.getObjects("Snake");
+
+  // Clear the snakes array
+  snakes = [];
+
+  // For each of these references, create a snake object, position it on the
+  // map based on the reference, push it to the array, and add it to the entity layer
+  for( let index = 0; index < stgSnake.length; index++ )
+  {
+    // Create the snake
+    var newSnake = new snake( stgSnake[index] );
+
+    // Add snake to array for later reference
+    snakes.push( newSnake );
+
+    // Add snake's sprite to the map
+    entity_layer.addChild( newSnake.sprite );
+    entity_layer.addChild( newSnake.snakeBody );
+  }
+}
+
+function snake( mapPosition )
+{
+  // Create the snake's 'hitbox' sprite
+  // This sprite will be invisible and will be used to check collision for the
+  // snake with walls, the player, etc.
+  this.sprite = new PIXI.Sprite( sheet.textures["Snake1.png"] );
+  this.sprite.visible = false;
+
+  // Create the snake's visible body
+  var frames = [];
+  for( let index = 1; index < 9; index++ )
+  {
+    frames.push( sheet.textures["Snake" + index + ".png"] );
+  }
+  this.snakeBody = new PIXI.AnimatedSprite( frames );
+  this.snakeBody.anchor.set(0.5);
+  this.snakeBody.animationSpeed = 0.1;
+  this.snakeBody.play();
+
+  // Place the snake on the map
+  this.sprite.x = mapPosition.x;
+  this.sprite.y = mapPosition.y;
+
+  this.snakeBody.x = this.sprite.x + this.sprite.width / 2;
+  this.snakeBody.y = this.sprite.y + this.sprite.height / 2;
+
+  this.stateM = StateMachine.create({
+    initial: {state: 'patrol', event: 'init'},
+    error: function() {},
+    events: [
+      {name: 'detectPlayer', from: 'patrol', to: 'chase'},
+      {name: 'losePlayer', from: 'chase', to: 'patrol'}
+    ]
+  });
+}
+
 // -------------------- Define Functions --------------------
 
 // ---------- Helper functions
@@ -316,7 +385,7 @@ function keyupEventHandler(e)
 document.addEventListener('keydown', keydownEventHandler);
 document.addEventListener('keyup', keyupEventHandler);
 
-
+// ---------- Main game functions
 function movePlayer()
 {
   // Vertical axis
@@ -383,6 +452,56 @@ function movePlayer()
 
 }
 
+function moveSnakes()
+{
+
+  var snake;
+
+  for( let index = 0; index < snakes.length; index++ )
+  {
+    snake = snakes[ index ];
+
+    // Switch based on snake's state
+    switch( snake.stateM.current )
+    {
+      case 'patrol':
+        //console.log("Patrolling");
+        // Slither forward in the direction the snake is facing
+        snake.sprite.x += 2 * Math.cos( snake.snakeBody.rotation );
+        snake.sprite.y += 2 * Math.sin( snake.snakeBody.rotation );
+
+        // Check if the snake  collided with a wall
+        var collide = tu.hitTestTile(snake.sprite, collidableArray, 0, world, "every");
+
+        // If that is the case, reverse the snake's movement and rotate it
+        if( !collide.hit ) {
+          snake.sprite.x -= 2 * Math.cos( snake.snakeBody.rotation );
+          snake.sprite.y -= 2 * Math.sin( snake.snakeBody.rotation );
+
+          // Rotate the snake 90 degrees
+          //snake.snakeBody.rotation += Math.PI / 4
+
+          // A potential different mechanic where the snake rotates randomly when it hits a wall
+          snake.snakeBody.rotation += ( Math.PI / 4 + ( Math.random() * Math.PI / 8 ) ) * Math.random() < 0.5 ? -1 : 1;
+        }
+
+        snake.snakeBody.x = snake.sprite.x + snake.sprite.width / 2;
+        snake.snakeBody.y = snake.sprite.y + snake.sprite.height / 2;
+
+      break;
+
+      case 'chase':
+        //console.log("Chasing");
+      break;
+    }
+
+
+  }
+}
+
+
+
+// ---------- Helper functions
 function update_camera() {
   stage.x = -player.sprite.x*GAME_SCALE + GAME_WIDTH/2 - player.sprite.width/2*GAME_SCALE;
   stage.y = -player.sprite.y*GAME_SCALE + GAME_HEIGHT/2 + player.sprite.height/2*GAME_SCALE;
@@ -434,12 +553,11 @@ function changeWorld(name)
   console.log( world.widthInTiles );
 
   world = tu.makeTiledWorld(name, "tileset.png");
-  
+
   stage.addChild(world);
 
   // Create the player again
   player = new playerInit();
-  player.sprite.visible = true;
 
   // Add player to map's entity layer
   entity_layer = world.getObject("Entities");
@@ -447,9 +565,9 @@ function changeWorld(name)
 
   //Add in the collidable objects to our collision array
   collidableArray = world.getObject("WallsLayer").data;
-  
+
   loadGame();
-  
+
   gameLoop();
 }
 
@@ -464,6 +582,7 @@ function gameLoop()
     if( gameState == GAME )
     {
       movePlayer();
+      moveSnakes();
       update_camera();
       boundObjects();
     }
