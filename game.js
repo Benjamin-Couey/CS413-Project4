@@ -15,6 +15,7 @@ var GAME_SCALE = 1;
 var TITLE = 0;
 var HELP = 1;
 var GAME = 2;
+var OVER = 3;
 
 var PLAYERSPEED = 5;
 
@@ -38,6 +39,8 @@ var dDown = false;
 var player;
 
 var snakes = [];
+var cobras = [];
+var spits = [];
 
 // A reference to the Tile Utilities
 var tu;
@@ -107,6 +110,24 @@ helpSprite.on('click', loadTitle );
 
 help.addChild(helpSprite);
 
+// ---------- Game over screen
+var gameover = new PIXI.Container();
+gameover.visible = false;
+stage.addChild(gameover);
+
+// Create gameover screen sprite
+var gameoverSprite = new PIXI.Sprite( PIXI.Texture.fromFrame("GameOver.png") );
+gameoverSprite.anchor.set(0.5);
+gameoverSprite.position.x = GAME_WIDTH / 2;
+gameoverSprite.position.y = GAME_HEIGHT / 2;
+
+// Clicking on the game over page should return user to the title screen.
+// Enable and attatch mouse handler
+gameoverSprite.interactive = true;
+gameoverSprite.on('click', loadTitle );
+
+gameover.addChild(gameoverSprite);
+
 console.log("Finish container definition");
 
 
@@ -154,7 +175,9 @@ function initializeSprites()
   entity_layer.addChild(player.sprite);
   entity_layer.addChild(player.playerBody);
 
+  // Add enemies to map's entity layer
   snakeInit();
+  cobraInit();
 
   //Add in the collidable objects to our collision array
   collidableArray = world.getObject("WallsLayer").data;
@@ -195,7 +218,7 @@ function initializeSprites()
 
   helpButton.on('click', loadHelp );
 
-    title.addChild(helpButton);
+  title.addChild(helpButton);
 
     // Background Sound
     PIXI.sound.Sound.from({
@@ -234,8 +257,9 @@ function playerInit()
   this.playerBody.animationSpeed = 0.2;
 
   // Place the player on the map
-  this.sprite.x = stgPlayer.x;
-  this.sprite.y = stgPlayer.y;
+  // Center the sprite within the 40 by 40 grid of the map
+  this.sprite.x = stgPlayer.x + ( 40 - this.sprite.width ) / 2;
+  this.sprite.y = stgPlayer.y - 40 + ( 40 - this.sprite.height ) / 2;
 
   this.playerBody.x = this.sprite.x + this.sprite.width / 2;
   this.playerBody.y = this.sprite.y + this.sprite.height / 2;
@@ -291,8 +315,9 @@ function snake( mapPosition )
   this.snakeBody.play();
 
   // Place the snake on the map
-  this.sprite.x = mapPosition.x;
-  this.sprite.y = mapPosition.y;
+  // Center the sprite within the 40 by 40 grid of the map
+  this.sprite.x = mapPosition.x + ( 40 - this.sprite.width ) / 2;
+  this.sprite.y = mapPosition.y - 40 + ( 40 - this.sprite.height ) / 2;
 
   this.snakeBody.x = this.sprite.x + this.sprite.width / 2;
   this.snakeBody.y = this.sprite.y + this.sprite.height / 2;
@@ -305,6 +330,89 @@ function snake( mapPosition )
       {name: 'losePlayer', from: 'chase', to: 'patrol'}
     ]
   });
+}
+
+function cobraInit()
+{
+  // Get an array of references to all the snake objects in the entities layer
+  // of the map
+  var stgCobra = world.getObjects("Cobra");
+
+  // Clear the snakes array
+  cobras = [];
+
+  // For each of these references, create a snake object, position it on the
+  // map based on the reference, push it to the array, and add it to the entity layer
+  for( let index = 0; index < stgCobra.length; index++ )
+  {
+    // Create the snake
+    var newCobra = new cobra( stgCobra[index] );
+
+    // Add snake to array for later reference
+    cobras.push( newCobra );
+
+    // Add snake's sprite to the map
+    entity_layer.addChild( newCobra.sprite );
+    entity_layer.addChild( newCobra.cobraBody );
+    entity_layer.addChild( newCobra.cobraHead );
+  }
+}
+
+function cobra( mapPosition )
+{
+  // Create the cobra's 'hitbox' sprite
+  // This sprite will be invisible and will be used to check collision for the
+  // snake with walls, the player, etc.
+  this.sprite = new PIXI.Sprite( sheet.textures["CobraBody.png"] );
+  this.sprite.visible = false;
+
+  // Create the cobra's visible body
+  this.cobraBody = new PIXI.Sprite( sheet.textures["CobraBody.png"] );
+  this.cobraBody.anchor.set(0.5);
+
+  // Create the cobra's visible head
+  this.cobraHead = new PIXI.Sprite( sheet.textures["CobraHead.png"] );
+  this.cobraHead.anchor.set(0,0.5);
+
+  // Place the snake on the map
+  // Center the sprite within the 40 by 40 grid of the map
+  this.sprite.x = mapPosition.x + ( 40 - this.sprite.width ) / 2;
+  this.sprite.y = mapPosition.y - 40 + ( 40 - this.sprite.height ) / 2;
+
+  this.cobraBody.x = this.sprite.x + this.sprite.width / 2;
+  this.cobraBody.y = this.sprite.y + this.sprite.height / 2;
+
+  this.cobraHead.x = this.sprite.x + this.sprite.width / 2;
+  this.cobraHead.y = this.sprite.y + this.sprite.height / 2;
+
+  this.spitCycle = 0;
+
+  this.stateM = StateMachine.create({
+    initial: {state: 'guard', event: 'init'},
+    error: function() {},
+    events: [
+      {name: 'detectPlayer', from: 'guard', to: 'attack'},
+      {name: 'losePlayer', from: 'attack', to: 'guard'}
+    ]
+  });
+}
+
+function spit( startingX, startingY, rotation )
+{
+  // Create the spit's 'hitbox' sprite
+  this.sprite = new PIXI.Sprite( sheet.textures["CobraSpit.png"] );
+  this.sprite.visible = false
+
+  // Create the spit's visible sprite
+  this.spit = new PIXI.Sprite( sheet.textures["CobraSpit.png"] );
+  this.spit.anchor.set(0.5);
+
+  this.sprite.x = startingX;
+  this.sprite.y = startingY;
+  this.spit.rotation = rotation;
+
+  this.spit.x = this.sprite.x + this.sprite.width / 2;
+  this.spit.y = this.sprite.y + this.sprite.height / 2;
 }
 
 // -------------------- Define Functions --------------------
@@ -324,6 +432,8 @@ function loadTitle()
   title.visible = true;
   help.visible = false;
   game.visible = false;
+  world.visible = false;
+  gameover.visible = false;
   gameState = TITLE;
 }
 
@@ -333,6 +443,8 @@ function loadHelp()
   title.visible = false;
   help.visible = true;
   game.visible = false;
+  world.visible = false;
+  gameover.visible = false;
   gameState = HELP;
 }
 
@@ -342,7 +454,19 @@ function loadGame()
   title.visible = false;
   help.visible = false;
   game.visible = true;
+  world.visible = true;
+  gameover.visible = false;
   gameState = GAME;
+}
+
+function loadGameOver()
+{
+  console.log("Loading gameover");
+  title.visible = false;
+  help.visible = false;
+  game.visible = false;
+  gameover.visible = true;
+  gameState = OVER;
 }
 
 // ---------- Input handlers
@@ -454,7 +578,6 @@ function movePlayer()
 
 function moveSnakes()
 {
-
   var snake;
 
   for( let index = 0; index < snakes.length; index++ )
@@ -489,24 +612,120 @@ function moveSnakes()
         snake.snakeBody.y = snake.sprite.y + snake.sprite.height / 2;
 
       break;
-
-      case 'chase':
-        //console.log("Chasing");
-      break;
     }
-
-
   }
 }
 
+function moveCobras()
+{
+  var cobra;
 
+  for( let index = 0; index < cobras.length; index++ )
+  {
+    cobra = cobras[ index ];
+
+    // Switch based on cobra's state
+    switch( cobra.stateM.current )
+    {
+      case 'guard':
+        // Have the snake look at the player
+        cobra.cobraHead.rotation = Math.atan2( player.sprite.y  - cobra.sprite.y,
+                                               player.sprite.x   - cobra.sprite.x );
+
+        // Check if the cobra is ready to spit
+        if( cobra.spitCycle >= 60 )
+        {
+          // If so spit
+          cobra.spitCycle = 0;
+          // Drop a spit if there are more than 3 of them in the world
+          if( spits.length > 3 )
+          {
+            spits.shift();
+          }
+          // Create a new spit at the cobra's position, aimed at the player
+          newSpit = new spit( cobra.sprite.x, cobra.sprite.y, cobra.cobraHead.rotation );
+          spits.push( newSpit );
+          entity_layer.addChild( newSpit.sprite );
+          entity_layer.addChild( newSpit.spit );
+        }
+        else
+        {
+          cobra.spitCycle += 1;
+        }
+      break;
+    }
+  }
+}
+
+function moveSpit()
+{
+  var spit;
+
+  for( let index = 0; index < spits.length; index++ )
+  {
+    spit = spits[ index ];
+
+    // Fly in the direction the spit is facing
+    spit.sprite.x += 4 * Math.cos( spit.spit.rotation );
+    spit.sprite.y += 4 * Math.sin( spit.spit.rotation );
+
+    spit.spit.x = spit.sprite.x + spit.sprite.width / 2;
+    spit.spit.y = spit.sprite.y + spit.sprite.height / 2;
+  }
+}
 
 // ---------- Helper functions
+function checkCollision( spriteA, spriteB )
+{
+  var a = spriteA.getBounds();
+  var b = spriteB.getBounds();
+  return a.x + a.width > b.x && a.x < b.x + b.width && a.y + a.height > b.y && a.y < b.y + b.height;
+}
+
+function handleCollision()
+{
+  // Check if player has collided with a snake
+  for( let index = 0; index < snakes.length; index++)
+  {
+    // Player collided with an enemy, the game is over
+    if( checkCollision( player.sprite, snakes[ index ].sprite ) )
+    {
+      console.log("Eaten by snek");
+      loadGameOver();
+      return null;
+    }
+  }
+
+  // Check if player has collided with a cobra
+  for( let index = 0; index < cobras.length; index++)
+  {
+    // Player collided with an enemy, the game is over
+    if( checkCollision( player.sprite, cobras[ index ].sprite ) )
+    {
+      console.log("Eaten by cobra");
+      loadGameOver();
+      return null;
+    }
+  }
+
+  // Check if player has collided with a cobra's spit
+  for( let index = 0; index < spits.length; index++)
+  {
+    // Player collided with an enemy, the game is over
+    if( checkCollision( player.sprite, spits[ index ].sprite ) )
+    {
+      console.log("Hit by spit");
+      loadGameOver();
+      return null;
+    }
+  }
+}
+
 function update_camera() {
-  stage.x = -player.sprite.x*GAME_SCALE + GAME_WIDTH/2 - player.sprite.width/2*GAME_SCALE;
-  stage.y = -player.sprite.y*GAME_SCALE + GAME_HEIGHT/2 + player.sprite.height/2*GAME_SCALE;
-  stage.x = -Math.max(0, Math.min(world.worldWidth*GAME_SCALE - GAME_WIDTH, -stage.x));
-  stage.y = -Math.max(0, Math.min(world.worldHeight*GAME_SCALE - GAME_HEIGHT, -stage.y));
+  game.x = -player.sprite.x*GAME_SCALE + GAME_WIDTH/2 - player.sprite.width/2*GAME_SCALE;
+  game.y = -player.sprite.y*GAME_SCALE + GAME_HEIGHT/2 + player.sprite.height/2*GAME_SCALE;
+  game.x = -Math.max(0, Math.min(world.worldWidth*GAME_SCALE - GAME_WIDTH, -game.x));
+  game.y = -Math.max(0, Math.min(world.worldHeight*GAME_SCALE - GAME_HEIGHT, -game.y));
 }
 
 function bound( sprite )
@@ -583,7 +802,10 @@ function gameLoop()
     {
       movePlayer();
       moveSnakes();
+      moveCobras();
+      moveSpit();
       update_camera();
+      handleCollision();
       boundObjects();
     }
 
