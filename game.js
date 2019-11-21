@@ -156,8 +156,12 @@ function initializeSprites()
   // Initialize tile utilities
   tu = new TileUtilities( PIXI );
 
+  console.log( tu );
+
   //Get a reference to the tile map and add it to the stage
   world = tu.makeTiledWorld("map.json", "tileset.png");
+
+  console.log( world );
 
   console.log("World parameters");
   console.log( world.tilewidth );
@@ -172,7 +176,7 @@ function initializeSprites()
   entity_layer = world.getObject("Entities");
 
   // Create the player
-  player = new playerInit();
+  player = new player();
 
   // Add player to map's entity layer
   entity_layer.addChild(player.sprite);
@@ -238,8 +242,9 @@ function initializeSprites()
 
 // -------------------- Objects --------------------
 
-function playerInit()
+function player()
 {
+  // Assuming every map will have a player object on it
   // Get a reference to the player object in the entities layer of the map
   var stgPlayer = world.getObject("Player");
 
@@ -275,26 +280,30 @@ function playerInit()
 
 function snakeInit()
 {
-  // Get an array of references to all the snake objects in the entities layer
-  // of the map
-  var stgSnake = world.getObjects("Snake");
-
-  // Clear the snakes array
-  snakes = [];
-
-  // For each of these references, create a snake object, position it on the
-  // map based on the reference, push it to the array, and add it to the entity layer
-  for( let index = 0; index < stgSnake.length; index++ )
+  // Only initialize cobras if there are cobras on the map
+  if( existsInWorld( "Snake" ) )
   {
-    // Create the snake
-    var newSnake = new snake( stgSnake[index] );
+    // Get an array of references to all the snake objects in the entities layer
+    // of the map
+    var stgSnake = world.getObjects("Snake");
 
-    // Add snake to array for later reference
-    snakes.push( newSnake );
+    // Clear the snakes array
+    snakes = [];
 
-    // Add snake's sprite to the map
-    entity_layer.addChild( newSnake.sprite );
-    entity_layer.addChild( newSnake.snakeBody );
+    // For each of these references, create a snake object, position it on the
+    // map based on the reference, push it to the array, and add it to the entity layer
+    for( let index = 0; index < stgSnake.length; index++ )
+    {
+      // Create the snake
+      var newSnake = new snake( stgSnake[index] );
+
+      // Add snake to array for later reference
+      snakes.push( newSnake );
+
+      // Add snake's sprite to the map
+      entity_layer.addChild( newSnake.sprite );
+      entity_layer.addChild( newSnake.snakeBody );
+    }
   }
 }
 
@@ -337,27 +346,31 @@ function snake( mapPosition )
 
 function cobraInit()
 {
-  // Get an array of references to all the snake objects in the entities layer
-  // of the map
-  var stgCobra = world.getObjects("Cobra");
-
-  // Clear the snakes array
-  cobras = [];
-
-  // For each of these references, create a snake object, position it on the
-  // map based on the reference, push it to the array, and add it to the entity layer
-  for( let index = 0; index < stgCobra.length; index++ )
+  // Only initialize cobras if there are cobras on the map
+  if( existsInWorld( "Cobra" ) )
   {
-    // Create the snake
-    var newCobra = new cobra( stgCobra[index] );
+    // Get an array of references to all the snake objects in the entities layer
+    // of the map
+    var stgCobra = world.getObjects("Cobra");
 
-    // Add snake to array for later reference
-    cobras.push( newCobra );
+    // Clear the snakes array
+    cobras = [];
 
-    // Add snake's sprite to the map
-    entity_layer.addChild( newCobra.sprite );
-    entity_layer.addChild( newCobra.cobraBody );
-    entity_layer.addChild( newCobra.cobraHead );
+    // For each of these references, create a snake object, position it on the
+    // map based on the reference, push it to the array, and add it to the entity layer
+    for( let index = 0; index < stgCobra.length; index++ )
+    {
+      // Create the snake
+      var newCobra = new cobra( stgCobra[index] );
+
+      // Add snake to array for later reference
+      cobras.push( newCobra );
+
+      // Add snake's sprite to the map
+      entity_layer.addChild( newCobra.sprite );
+      entity_layer.addChild( newCobra.cobraBody );
+      entity_layer.addChild( newCobra.cobraHead );
+    }
   }
 }
 
@@ -426,6 +439,20 @@ function spit( startingX, startingY, rotation )
 function distance( x1, y1, x2, y2)
 {
   return Math.sqrt( Math.pow( x1 - x2, 2 ) + Math.pow( y1 - y2, 2 ) );
+}
+
+// Returns true if the object name is present in the Tile Utilities world object
+// false otherwise
+function existsInWorld( objectName )
+{
+  for( let index = 0; index < world.objects.length; index++ )
+  {
+    if( world.objects[ name ] == objectName )
+    {
+      return true;
+    }
+  }
+  return false;
 }
 
 // ---------- Screen loading functions
@@ -744,7 +771,7 @@ function bound( sprite )
         changeWorld("map2.json");
         mapState = "Map1";
         break;
-        
+
         case "Map1":
         changeWorld("map.json");
         mapState = "Map0";
@@ -760,7 +787,7 @@ function bound( sprite )
         changeWorld("map2.json");
         mapState = "Map1";
         break;
-        
+
         case "Map1":
         changeWorld("map.json");
         mapState = "Map0";
@@ -776,7 +803,7 @@ function bound( sprite )
         changeWorld("map2.json");
         mapState = "Map1";
         break;
-        
+
         case "Map1":
         changeWorld("map.json");
         mapState = "Map0";
@@ -792,7 +819,7 @@ function bound( sprite )
         changeWorld("map2.json");
         mapState = "Map1";
         break;
-        
+
         case "Map1":
         changeWorld("map.json");
         mapState = "Map0";
@@ -823,7 +850,7 @@ function changeWorld(name)
   stage.addChild(world);
 
   // Create the player again
-  player = new playerInit();
+  player = new player();
 
   // Add player to map's entity layer
   entity_layer = world.getObject("Entities");
