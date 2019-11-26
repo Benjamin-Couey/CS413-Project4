@@ -12,7 +12,7 @@ function existsInWorld( objectName )
 {
   for( let index = 0; index < world.objects.length; index++ )
   {
-    if( world.objects[ name ] == objectName )
+    if( world.objects[ index ][ "name" ] == objectName )
     {
       return true;
     }
