@@ -176,7 +176,7 @@ function initializeSprites()
   entity_layer = world.getObject("Entities");
 
   // Create the player
-  player = new player();
+  player = new loadPlayer();
 
   // Add player to map's entity layer
   entity_layer.addChild(player.sprite);

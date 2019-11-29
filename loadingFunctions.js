@@ -61,7 +61,7 @@ function changeWorld(name)
   stage.addChild(world);
 
   // Create the player again
-  player = new player();
+  player = new loadPlayer();
 
   // Add player to map's entity layer
   entity_layer = world.getObject("Entities");
