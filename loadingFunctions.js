@@ -2,6 +2,11 @@
 // game, switching between different maps, and otherwise reinitializing the game
 // state.
 
+function resetGame()
+{
+	location.reload();
+}
+
 function loadTitle()
 {
   console.log("Loading title");

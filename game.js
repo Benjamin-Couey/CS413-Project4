@@ -141,7 +141,7 @@ gameoverSprite.position.y = GAME_HEIGHT / 2;
 // Clicking on the game over page should return user to the title screen.
 // Enable and attatch mouse handler
 gameoverSprite.interactive = true;
-gameoverSprite.on('click', loadTitle );
+gameoverSprite.on('click', resetGame );
 
 gameover.addChild(gameoverSprite);
 
