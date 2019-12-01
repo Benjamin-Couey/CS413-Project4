@@ -1,7 +1,7 @@
 // This file contains the definitions of all objects used in the game, as well as
 // the functions needed to initialize them and place tham on the map.
 
-function player()
+function loadPlayer()
 {
   // Assuming every map will have a player object on it
   // Get a reference to the player object in the entities layer of the map
