@@ -2,7 +2,7 @@
 
 "8thnote.png":
 {
-	"frame": {"x":30,"y":0,"w":16,"h":16},
+	"frame": {"x":39,"y":0,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
@@ -10,7 +10,7 @@
 },
 "8thnotes.png":
 {
-	"frame": {"x":46,"y":0,"w":20,"h":16},
+	"frame": {"x":55,"y":0,"w":20,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":20,"h":16},
@@ -18,15 +18,23 @@
 },
 "barrier.png":
 {
-	"frame": {"x":64,"y":56,"w":40,"h":40},
+	"frame": {"x":96,"y":88,"w":40,"h":40},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
 	"sourceSize": {"w":40,"h":40}
 },
+"BeatMarker.png":
+{
+	"frame": {"x":32,"y":88,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
 "CobraBody.png":
 {
-	"frame": {"x":66,"y":0,"w":20,"h":20},
+	"frame": {"x":75,"y":0,"w":20,"h":20},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":20,"h":20},
@@ -34,7 +42,7 @@
 },
 "CobraHead.png":
 {
-	"frame": {"x":17,"y":0,"w":13,"h":14},
+	"frame": {"x":26,"y":0,"w":13,"h":14},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":14},
@@ -42,7 +50,7 @@
 },
 "CobraSpit.png":
 {
-	"frame": {"x":0,"y":0,"w":17,"h":6},
+	"frame": {"x":9,"y":0,"w":17,"h":6},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":6},
@@ -50,133 +58,37 @@
 },
 "HelpButton.png":
 {
-	"frame": {"x":0,"y":96,"w":65,"h":38},
+	"frame": {"x":0,"y":128,"w":65,"h":38},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":65,"h":38},
 	"sourceSize": {"w":65,"h":38}
 },
-"PlayerBody1.png":
+"Notes1.png":
 {
-	"frame": {"x":176,"y":0,"w":18,"h":24},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
-	"sourceSize": {"w":18,"h":24}
-},
-"PlayerBody2.png":
-{
-	"frame": {"x":0,"y":24,"w":18,"h":24},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
-	"sourceSize": {"w":18,"h":24}
-},
-"PlayerBody3.png":
-{
-	"frame": {"x":194,"y":0,"w":18,"h":24},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
-	"sourceSize": {"w":18,"h":24}
-},
-"PlayerBody4.png":
-{
-	"frame": {"x":86,"y":0,"w":18,"h":24},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
-	"sourceSize": {"w":18,"h":24}
-},
-"PlayerBody5.png":
-{
-	"frame": {"x":104,"y":0,"w":18,"h":24},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
-	"sourceSize": {"w":18,"h":24}
-},
-"PlayerBody6.png":
-{
-	"frame": {"x":140,"y":0,"w":18,"h":24},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
-	"sourceSize": {"w":18,"h":24}
-},
-"PlayerBody7.png":
-{
-	"frame": {"x":158,"y":0,"w":18,"h":24},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
-	"sourceSize": {"w":18,"h":24}
-},
-"PlayerBody8.png":
-{
-	"frame": {"x":122,"y":0,"w":18,"h":24},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
-	"sourceSize": {"w":18,"h":24}
-},
-"Snake1.png":
-{
-	"frame": {"x":32,"y":56,"w":32,"h":32},
+	"frame": {"x":160,"y":56,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 	"sourceSize": {"w":32,"h":32}
 },
-"Snake2.png":
+"Notes2.png":
 {
-	"frame": {"x":0,"y":56,"w":32,"h":32},
+	"frame": {"x":0,"y":88,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 	"sourceSize": {"w":32,"h":32}
 },
-"Snake3.png":
+"Notes3.png":
 {
-	"frame": {"x":178,"y":24,"w":32,"h":32},
+	"frame": {"x":96,"y":56,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 	"sourceSize": {"w":32,"h":32}
 },
-"Snake4.png":
-{
-	"frame": {"x":114,"y":24,"w":32,"h":32},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
-	"sourceSize": {"w":32,"h":32}
-},
-"Snake5.png":
-{
-	"frame": {"x":146,"y":24,"w":32,"h":32},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
-	"sourceSize": {"w":32,"h":32}
-},
-"Snake6.png":
-{
-	"frame": {"x":18,"y":24,"w":32,"h":32},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
-	"sourceSize": {"w":32,"h":32}
-},
-"Snake7.png":
-{
-	"frame": {"x":50,"y":24,"w":32,"h":32},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
-	"sourceSize": {"w":32,"h":32}
-},
-"Snake8.png":
+"Notes4.png":
 {
 	"frame": {"x":82,"y":24,"w":32,"h":32},
 	"rotated": false,
@@ -184,9 +96,161 @@
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 	"sourceSize": {"w":32,"h":32}
 },
+"PlayerBody1.png":
+{
+	"frame": {"x":0,"y":24,"w":18,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
+	"sourceSize": {"w":18,"h":24}
+},
+"PlayerBody2.png":
+{
+	"frame": {"x":167,"y":0,"w":18,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
+	"sourceSize": {"w":18,"h":24}
+},
+"PlayerBody3.png":
+{
+	"frame": {"x":95,"y":0,"w":18,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
+	"sourceSize": {"w":18,"h":24}
+},
+"PlayerBody4.png":
+{
+	"frame": {"x":113,"y":0,"w":18,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
+	"sourceSize": {"w":18,"h":24}
+},
+"PlayerBody5.png":
+{
+	"frame": {"x":185,"y":0,"w":18,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
+	"sourceSize": {"w":18,"h":24}
+},
+"PlayerBody6.png":
+{
+	"frame": {"x":203,"y":0,"w":18,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
+	"sourceSize": {"w":18,"h":24}
+},
+"PlayerBody7.png":
+{
+	"frame": {"x":149,"y":0,"w":18,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
+	"sourceSize": {"w":18,"h":24}
+},
+"PlayerBody8.png":
+{
+	"frame": {"x":131,"y":0,"w":18,"h":24},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
+	"sourceSize": {"w":18,"h":24}
+},
+"SleepCobra.png":
+{
+	"frame": {"x":64,"y":88,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"SleepParticle.png":
+{
+	"frame": {"x":0,"y":0,"w":9,"h":9},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":9,"h":9},
+	"sourceSize": {"w":9,"h":9}
+},
+"SleepSnake.png":
+{
+	"frame": {"x":128,"y":56,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"Snake1.png":
+{
+	"frame": {"x":146,"y":24,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"Snake2.png":
+{
+	"frame": {"x":64,"y":56,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"Snake3.png":
+{
+	"frame": {"x":50,"y":24,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"Snake4.png":
+{
+	"frame": {"x":18,"y":24,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"Snake5.png":
+{
+	"frame": {"x":114,"y":24,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"Snake6.png":
+{
+	"frame": {"x":0,"y":56,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"Snake7.png":
+{
+	"frame": {"x":32,"y":56,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
+"Snake8.png":
+{
+	"frame": {"x":178,"y":24,"w":32,"h":32},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
+	"sourceSize": {"w":32,"h":32}
+},
 "StartButton.png":
 {
-	"frame": {"x":104,"y":56,"w":75,"h":30},
+	"frame": {"x":136,"y":88,"w":75,"h":30},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":30},
@@ -194,7 +258,7 @@
 },
 "Title.png":
 {
-	"frame": {"x":65,"y":96,"w":147,"h":48},
+	"frame": {"x":65,"y":128,"w":147,"h":48},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":147,"h":48},
@@ -205,8 +269,8 @@
 	"version": "1.0",
 	"image": "Assets.png",
 	"format": "RGBA8888",
-	"size": {"w":212,"h":144},
+	"size": {"w":221,"h":176},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:0cfa99b8123629652cc238446d121fd2:7a35b4823275ac4b5c13cc4576b066df:343a2cbedbd3a58ea401ebc8df9c4834$"
+	"smartupdate": "$TexturePacker:SmartUpdate:33b42f7b9fd17d540ebfd24bd18d7d72:f998a9ec34cdcd6d9bb2f6b088a4ff8c:343a2cbedbd3a58ea401ebc8df9c4834$"
 }
 }

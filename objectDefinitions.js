@@ -31,10 +31,43 @@ function player()
   this.playerBody.x = this.sprite.x + this.sprite.width / 2;
   this.playerBody.y = this.sprite.y + this.sprite.height / 2;
 
+  this.beatMarker = new PIXI.Sprite( sheet.textures["BeatMarker.png"] );
+  this.beatMarker.anchor.set(0.5);
+  this.beatMarker.x = this.sprite.x + this.sprite.width / 2;
+  this.beatMarker.y = this.sprite.y + this.sprite.height / 2 + 150;
+
+  // Create the state machine to control the player's songs
+  this.stateM = StateMachine.create({
+    init: 'none',
+    error: function() {},
+    events: [
+      {name: 'playH', from: 'none', to: 'H'},
+
+      {name: 'playH', from: 'H', to: 'none'},
+      {name: 'playK', from: 'H', to: 'HK'},
+      {name: 'playJ', from: 'H', to: 'none'},
+      {name: 'playL', from: 'H', to: 'none'},
+      {name: 'offbeat', from: 'H', to: 'none'},
+
+      {name: 'playH', from: 'HK', to: 'none'},
+      {name: 'playK', from: 'HK', to: 'none'},
+      {name: 'playJ', from: 'HK', to: 'HKJ'},
+      {name: 'playL', from: 'HK', to: 'none'},
+      {name: 'offbeat', from: 'HK', to: 'none'},
+
+      {name: 'playH', from: 'HKJ', to: 'none'},
+      {name: 'playK', from: 'HKJ', to: 'none'},
+      {name: 'playJ', from: 'HKJ', to: 'none'},
+      {name: 'playL', from: 'HKJ', to: 'none'},
+      {name: 'offbeat', from: 'HKJ', to: 'none'}
+    ]
+  });
+
   // Instance variables
   this.vx = 0;
   this.vy = 0;
   this.moving = false;
+  this.rhythm = 0;
 }
 
 function snakeInit()
@@ -62,6 +95,7 @@ function snakeInit()
       // Add snake's sprite to the map
       entity_layer.addChild( newSnake.sprite );
       entity_layer.addChild( newSnake.snakeBody );
+      entity_layer.addChild( newSnake.sleepSnake );
     }
   }
 }
@@ -85,6 +119,11 @@ function snake( mapPosition )
   this.snakeBody.animationSpeed = 0.1;
   this.snakeBody.play();
 
+  // Create the snake's sleeping sprite
+  this.sleepSnake = new PIXI.Sprite( sheet.textures["SleepSnake.png"] );
+  this.sleepSnake.anchor.set(0.5);
+  this.sleepSnake.visible = false;
+
   // Place the snake on the map
   // Center the sprite within the 40 by 40 grid of the map
   this.sprite.x = mapPosition.x + ( 40 - this.sprite.width ) / 2;
@@ -93,12 +132,14 @@ function snake( mapPosition )
   this.snakeBody.x = this.sprite.x + this.sprite.width / 2;
   this.snakeBody.y = this.sprite.y + this.sprite.height / 2;
 
+  this.sleepTimer = 0;
+
   this.stateM = StateMachine.create({
-    initial: {state: 'patrol', event: 'init'},
+    initial: {state: 'awake', event: 'init'},
     error: function() {},
     events: [
-      {name: 'detectPlayer', from: 'patrol', to: 'chase'},
-      {name: 'losePlayer', from: 'chase', to: 'patrol'}
+      {name: 'fallAsleep', from: 'awake', to: 'asleep'},
+      {name: 'wakeUp', from: 'asleep', to: 'awake'}
     ]
   });
 }
@@ -129,6 +170,7 @@ function cobraInit()
       entity_layer.addChild( newCobra.sprite );
       entity_layer.addChild( newCobra.cobraBody );
       entity_layer.addChild( newCobra.cobraHead );
+      entity_layer.addChild( newCobra.sleepCobra );
     }
   }
 }
@@ -149,6 +191,11 @@ function cobra( mapPosition )
   this.cobraHead = new PIXI.Sprite( sheet.textures["CobraHead.png"] );
   this.cobraHead.anchor.set(0,0.5);
 
+  // Create the cobta's sleeping sprite
+  this.sleepCobra = new PIXI.Sprite( sheet.textures["SleepCobra.png"] );
+  this.sleepCobra.anchor.set(0.5);
+  this.sleepCobra.visible = false;
+
   // Place the snake on the map
   // Center the sprite within the 40 by 40 grid of the map
   this.sprite.x = mapPosition.x + ( 40 - this.sprite.width ) / 2;
@@ -160,14 +207,19 @@ function cobra( mapPosition )
   this.cobraHead.x = this.sprite.x + this.sprite.width / 2;
   this.cobraHead.y = this.sprite.y + this.sprite.height / 2;
 
+  this.sleepCobra.x = this.sprite.x + this.sprite.width / 2;
+  this.sleepCobra.y = this.sprite.y + this.sprite.height / 2;
+
   this.spitCycle = 0;
 
+  this.sleepTimer = 0;
+
   this.stateM = StateMachine.create({
-    initial: {state: 'guard', event: 'init'},
+    initial: {state: 'awake', event: 'init'},
     error: function() {},
     events: [
-      {name: 'detectPlayer', from: 'guard', to: 'attack'},
-      {name: 'losePlayer', from: 'attack', to: 'guard'}
+      {name: 'fallAsleep', from: 'awake', to: 'asleep'},
+      {name: 'wakeUp', from: 'asleep', to: 'awake'}
     ]
   });
 }

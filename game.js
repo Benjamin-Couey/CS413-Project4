@@ -5,8 +5,11 @@ const WKEY = 87;
 const AKEY = 65;
 const SKEY = 83;
 const DKEY = 68;
-const SPACE = 32;
-const SHIFT = 16;
+const HKEY = 72;
+const JKEY = 74;
+const KKEY = 75;
+const LKEY = 76;
+
 
 var GAME_WIDTH = 400;
 var GAME_HEIGHT = 400;
@@ -34,9 +37,16 @@ var aDown = false;
 var sDown = false;
 var dDown = false;
 
+// var hDown = false;
+// var jDown = false;
+// var kDown = false;
+// var lDown = false;
+
 // global arrays to store references to game Objects
 // these will be filled, emptied, and modified as new screens are loaded
 var player;
+
+var beatCounter;
 
 var snakes = [];
 var cobras = [];
@@ -59,6 +69,10 @@ var collidableArray;
 
 // A reference to the spritesheet
 var sheet;
+
+// The current time, used for particles
+var elapsed = Date.now();
+var songOfSleepEmitter;
 
 
 
@@ -181,6 +195,7 @@ function initializeSprites()
   // Add player to map's entity layer
   entity_layer.addChild(player.sprite);
   entity_layer.addChild(player.playerBody);
+  game.addChild(player.beatMarker);
 
   // Add enemies to map's entity layer
   snakeInit();
@@ -188,6 +203,70 @@ function initializeSprites()
 
   //Add in the collidable objects to our collision array
   collidableArray = world.getObject("WallsLayer").data;
+
+
+
+
+  // Initialize emitters
+  songOfSleepEmitter = new PIXI.particles.Emitter(
+    // Container the emitter will be put in
+    entity_layer,
+
+    // The collection of particle images
+    [ sheet.textures["8thnote.png"],
+      sheet.textures["8thnotes.png"] ],
+
+    // Emitter configuration
+    {
+	  "alpha": {
+		  "start": 1,
+		  "end": 0
+	  },
+	  "scale": {
+		  "start": 3,
+		  "end": 1.2,
+		  "minimumScaleMultiplier": 1
+	  },
+	  "color": {
+      "start": "#dcdcdc",
+      "end": "#dcdcdc"
+	  },
+	  "speed": {
+      "start": 400,
+      "end": 0,
+      "minimumSpeedMultiplier": 1
+	  },
+	  "acceleration": {
+		  "x": 0,
+		  "y": 0
+	  },
+	  "startRotation": {
+		  "min": 0,
+		  "max": 360
+	  },
+	  "rotationSpeed": {
+		  "min": 0,
+		  "max": 0
+	  },
+	  "lifetime": {
+		  "min": 0.5,
+		  "max": 1
+	  },
+	  "blendMode": "normal",
+	  "frequency": 0.002,
+	  "emitterLifetime": -1,
+	  "maxParticles": 25,
+	  "pos": {
+		  "x": 0,
+		  "y": 0
+	  },
+	  "addAtBack": false,
+	  "spawnType": "point"
+    } );
+
+
+
+
 
   // Create and add the buttons for the title screen
   // NOTE: This has to be done in this function because in the future those buttons
@@ -240,6 +319,8 @@ function initializeSprites()
   gameLoop();
 }
 
+//songOfSleepEmitter.emit = true;
+
 // -------------------- Main game loop --------------------
 function gameLoop()
 {
@@ -250,12 +331,20 @@ function gameLoop()
     if( gameState == GAME )
     {
       movePlayer();
+      playerRhythm();
       moveSnakes();
       moveCobras();
       moveSpit();
       update_camera();
       handleCollision();
       boundObjects();
+
+      // Update emitters
+      var now = Date.now();
+      songOfSleepEmitter.update((now - elapsed) * 0.001 );
+      elapsed = now;
+      // songOfSleepEmitter should only play once
+      songOfSleepEmitter.emit = false;
     }
 
     renderer.render(stage);

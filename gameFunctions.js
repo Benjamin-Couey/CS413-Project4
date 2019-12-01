@@ -10,11 +10,14 @@ function checkCollision( spriteA, spriteB )
 
 function handleCollision()
 {
+  // For snakes and cobras, players can't collide with them while they are sleeping
+
   // Check if player has collided with a snake
   for( let index = 0; index < snakes.length; index++)
   {
     // Player collided with an enemy, the game is over
-    if( checkCollision( player.sprite, snakes[ index ].sprite ) )
+    // Ignore sleeping enemies
+    if( snakes[ index ].stateM.is('awake') && checkCollision( player.sprite, snakes[ index ].sprite ) )
     {
       console.log("Eaten by snek");
       loadGameOver();
@@ -26,7 +29,8 @@ function handleCollision()
   for( let index = 0; index < cobras.length; index++)
   {
     // Player collided with an enemy, the game is over
-    if( checkCollision( player.sprite, cobras[ index ].sprite ) )
+    // Ignore sleeping enemeis
+    if( cobras[ index ].stateM.is('awake') && checkCollision( player.sprite, cobras[ index ].sprite ) )
     {
       console.log("Eaten by cobra");
       loadGameOver();
@@ -146,6 +150,18 @@ function keydownEventHandler(e)
   if (e.keyCode == DKEY) {
     dDown = true;
   }
+  if (e.keyCode == HKEY) {
+    playSong( HKEY );
+  }
+  if (e.keyCode == JKEY) {
+    playSong( JKEY );
+  }
+  if (e.keyCode == KKEY) {
+    playSong( KKEY );
+  }
+  if (e.keyCode == LKEY) {
+    playSong( LKEY );
+  }
 }
 
 function keyupEventHandler(e)
@@ -226,6 +242,9 @@ function movePlayer()
     player.playerBody.x = player.sprite.x + player.sprite.width / 2;
     player.playerBody.y = player.sprite.y + player.sprite.height / 2;
 
+    player.beatMarker.x = player.sprite.x + player.sprite.width / 2;
+    player.beatMarker.y = player.sprite.y + player.sprite.height / 2 + 150;
+
     // Check if the player is moving, and if so, animate their sprite
     if( player.vx == 0 && player.vy == 0) {
       player.playerBody.stop();
@@ -234,6 +253,121 @@ function movePlayer()
       player.playerBody.play();
     }
 
+}
+
+function playSong( note )
+{
+
+  console.log(player.rhythm);
+  // Only play a note if done so in the right rythm
+  if( player.rhythm < 15 )
+  {
+    console.log("Player played on beat");
+    switch( note )
+    {
+      case HKEY:
+        player.stateM.playH();
+      break;
+      case JKEY:
+        player.stateM.playJ();
+      break;
+      case KKEY:
+        player.stateM.playK();
+      break;
+      case LKEY:
+        // Song of Sleep - HKJL
+        if( player.stateM.is( "HKJ") )
+        {
+          // Call song of sleep function
+          console.log("Song of sleep");
+          songOfSleep();
+        }
+        player.stateM.playL();
+      break;
+    }
+    console.log( player.stateM.current );
+  }
+
+  // Otherwise, reset player's song for palying offbeat
+  else
+  {
+    console.log("Player played offbeat");
+    player.stateM.offbeat();
+  }
+
+}
+
+function playerRhythm()
+{
+  // If rhythm is 0-14, player is on beat
+  if( player.rhythm == 0 )
+  {
+      player.beatMarker.visible = true;
+  }
+  // If rhythm is 15-29, player is off beat
+  else if( player.rhythm == 15 )
+  {
+      player.beatMarker.visible = false;
+  }
+
+  // Iterate player rythm
+  player.rhythm += 1;
+
+  // Reset player rythm
+  if( player.rhythm >= 30 )
+  {
+    player.rhythm = 0;
+  }
+}
+
+function songOfSleep()
+{
+  console.log("Played the song of sleep");
+  console.log( entity_layer );
+  // Create song of sleep particle effect
+  songOfSleepEmitter.updateSpawnPos( player.sprite.x, player.sprite.y );
+  songOfSleepEmitter.resetPositionTracking();
+  songOfSleepEmitter.emit = true;
+
+  // For each cobra and snake, check to see if it is within 100 pixils of the
+  // player. If so, put that snake ot sleep.
+  for( let index = 0; index < snakes.length; index++)
+  {
+    var snake = snakes[ index ];
+
+    if( snake.stateM.is('awake') && distance( player.sprite.x, player.sprite.y, snake.sprite.x, snake.sprite.y ) <= 100 )
+    {
+      // Put the snake to sleep
+      snake.snakeBody.visible = false;
+      snake.sleepSnake.visible = true;
+      snake.sleepSnake.x = snake.sprite.x + snake.sprite.width / 2;
+      snake.sleepSnake.y = snake.sprite.y + snake.sprite.height / 2;
+      snake.sleepSnake.rotation = snake.snakeBody.rotation;
+      console.log( snake.sleepSnake.x );
+      console.log( snake.sleepSnake.y );
+      console.log( snake.sleepSnake.rotation );
+      console.log( snake.sleepSnake.visible );
+      snake.sleepTimer = 0;
+      snake.stateM.fallAsleep();
+    }
+
+  }
+
+  // Check if player has collided with a cobra
+  for( let index = 0; index < cobras.length; index++)
+  {
+    var cobra = cobras[ index ];
+
+    if( cobra.stateM.is('awake') && distance( player.sprite.x, player.sprite.y, cobra.sprite.x, cobra.sprite.y ) <= 100 )
+    {
+      // Put the cobra to sleep
+      cobra.cobraBody.visible = false;
+      cobra.cobraHead.visible = false;
+      cobra.sleepCobra.visible = true;
+      cobra.sleepTimer = 0;
+      cobra.stateM.fallAsleep();
+    }
+  }
 }
 
 function moveSnakes()
@@ -247,8 +381,7 @@ function moveSnakes()
     // Switch based on snake's state
     switch( snake.stateM.current )
     {
-      case 'patrol':
-        //console.log("Patrolling");
+      case 'awake':
         // Slither forward in the direction the snake is facing
         snake.sprite.x += 2 * Math.cos( snake.snakeBody.rotation );
         snake.sprite.y += 2 * Math.sin( snake.snakeBody.rotation );
@@ -272,6 +405,20 @@ function moveSnakes()
         snake.snakeBody.y = snake.sprite.y + snake.sprite.height / 2;
 
       break;
+
+      case 'asleep':
+        // Iterate the snake's sleep timer until it wakes up
+        snake.sleepTimer += 1;
+
+        // Sleep for 5 seconds
+        if( snake.sleepTimer > 150 )
+        {
+          // Wake the snake up
+          snake.snakeBody.visible = true;
+          snake.sleepSnake.visible = false;
+          snake.stateM.wakeUp();
+        }
+      break;
     }
   }
 }
@@ -287,7 +434,7 @@ function moveCobras()
     // Switch based on cobra's state
     switch( cobra.stateM.current )
     {
-      case 'guard':
+      case 'awake':
         // Have the snake look at the player
         cobra.cobraHead.rotation = Math.atan2( player.sprite.y  - cobra.sprite.y,
                                                player.sprite.x   - cobra.sprite.x );
@@ -300,6 +447,8 @@ function moveCobras()
           // Drop a spit if there are more than 3 of them in the world
           if( spits.length > 3 )
           {
+            entity_layer.removeChild( spits[0].sprite );
+            entity_layer.removeChild( spits[0].spit );
             spits.shift();
           }
           // Create a new spit at the cobra's position, aimed at the player
@@ -311,6 +460,21 @@ function moveCobras()
         else
         {
           cobra.spitCycle += 1;
+        }
+      break;
+
+      case 'asleep':
+        // Iterate the cobra's sleep timer until it wakes up
+        cobra.sleepTimer += 1;
+
+        // Sleep for 5 seconds
+        if( cobra.sleepTimer > 150 )
+        {
+          // Wake the cobra up
+          cobra.cobraBody.visible = true;
+          cobra.cobraHead.visible = true;
+          cobra.sleepCobra.visible = false;
+          cobra.stateM.wakeUp();
         }
       break;
     }
@@ -331,5 +495,16 @@ function moveSpit()
 
     spit.spit.x = spit.sprite.x + spit.sprite.width / 2;
     spit.spit.y = spit.sprite.y + spit.sprite.height / 2;
+
+    // Check if the spit collided with a wall
+    var collide = tu.hitTestTile(spit.sprite, collidableArray, 0, world, "every");
+
+    // If that is the case, delete the spit
+    if( !collide.hit )
+    {
+      entity_layer.removeChild( spit.sprite );
+      entity_layer.removeChild( spit.spit );
+      spits.splice( index, index + 1 );
+    }
   }
 }
