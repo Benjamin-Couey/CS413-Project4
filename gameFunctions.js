@@ -62,7 +62,7 @@ function bound( sprite )
 {
   // Given a sprite, make sure that it stays within the bounds of the screen
   // Accounts for the sprites anchor position to keep the entirety of the sprite in bounds
-  if( sprite.position.x + sprite.anchor.x * 32 < 0)
+  if( sprite.position.x + sprite.anchor.x * 32 < 32)
   {
     sprite.position.x = sprite.anchor.x * 32;
     switch(mapState)
@@ -78,7 +78,7 @@ function bound( sprite )
         break;
     }
   }
-  else if( sprite.position.x + sprite.anchor.x * 32 > world.worldWidth )
+  else if( sprite.position.x + sprite.anchor.x * 32 > world.worldWidth - 32 )
   {
     sprite.position.x = world.worldWidth - sprite.anchor.x * 32;
     switch(mapState)
@@ -94,7 +94,7 @@ function bound( sprite )
         break;
     }
   }
-  if( sprite.position.y + sprite.anchor.y * 32 < 0 )
+  if( sprite.position.y + sprite.anchor.y * 32 < 32 )
   {
     sprite.position.y = sprite.anchor.y * 32;
     switch(mapState)
@@ -110,7 +110,7 @@ function bound( sprite )
         break;
     }
   }
-  else if( sprite.position.y + sprite.anchor.y * 32 > world.worldHeight )
+  else if( sprite.position.y + sprite.anchor.y * 32 > world.worldHeight - 32 )
   {
     sprite.position.y = world.worldHeight - sprite.anchor.y * 32;
     switch(mapState)
