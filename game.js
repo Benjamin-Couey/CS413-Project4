@@ -212,7 +212,6 @@ function initializeSprites()
   helpButton.on('click', loadHelp );
 
   title.addChild(helpButton);
-
     // Background Sound
     PIXI.sound.Sound.from({
         url: "Assets/backgroundmusic.wav",
