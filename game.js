@@ -145,8 +145,8 @@ gameoverSprite.on('click', resetGame );
 
 gameover.addChild(gameoverSprite);
 
-console.log("Finish container definition");
 
+console.log("Finish container definition");
 
 
 // -------------------- Initialization --------------------
@@ -161,7 +161,8 @@ PIXI.loader.add("Assets.json")
             .add("map2.json")
 			.add("map3.json")
             .add("tileset.png")
-            .load( initializeSprites );
+    .load(initializeSprites);
+
 
 // Create the sprites that will be used in every biome
 // The large title, help, and game over screen sprites are bigger than this whole
@@ -212,8 +213,8 @@ function initializeSprites()
 
   helpButton.on('click', loadHelp );
 
-  title.addChild(helpButton);
-    // Background Sound
+    title.addChild(helpButton);
+
     PIXI.sound.Sound.from({
         url: "Assets/backgroundmusic.wav",
         preload: true,

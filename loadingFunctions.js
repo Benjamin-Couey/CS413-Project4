@@ -54,9 +54,9 @@ function changeWorld(name)
 {
   //Get a reference to the tile map and add it to the stage
   
-  //Remove curretn world if there is one
+  //Remove current world if there is one
 
-	  stage.removeChild(world);
+    stage.removeChild(world);
  
   
   console.log("World parameters");
@@ -72,7 +72,7 @@ function changeWorld(name)
 
   game.addChild(world);
 
-  
+
   // Get a reference to the spritesheet
   sheet = PIXI.loader.resources["Assets.json"];
 
