@@ -53,17 +53,17 @@ function loadGameOver()
 function changeWorld(name)
 {
   //Get a reference to the tile map and add it to the stage
-  
+
   //Remove curretn world if there is one
 
-	  stage.removeChild(world);
- 
-  
+	game.removeChild(world);
+
+
   console.log("World parameters");
   console.log( name );
 
   world = tu.makeTiledWorld(name, "tileset.png");
-  
+
   //Log the new world
   console.log( world );
   console.log( world.tilewidth );
@@ -72,7 +72,7 @@ function changeWorld(name)
 
   game.addChild(world);
 
-  
+
   // Get a reference to the spritesheet
   sheet = PIXI.loader.resources["Assets.json"];
 
@@ -88,10 +88,10 @@ function changeWorld(name)
 
   //Add in the collidable objects to our collision array
   collidableArray = world.getObject("WallsLayer").data;
-  
+
   //Add in emmiters for the songs
   songOfSleepEmitter = createSongEmitter("SLEEP");
-  
+
   // Add enemies to map's entity layer
   snakeInit();
   cobraInit();
