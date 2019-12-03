@@ -1,7 +1,8 @@
 // -------------------- Define Constants --------------------
 
 // Keycodes
-const WKEY = 87;
+//const WKEY = 87;
+const WKEY = 50;
 const AKEY = 65;
 const SKEY = 83;
 const DKEY = 68;
@@ -69,6 +70,16 @@ var collidableArray;
 
 // A reference to the spritesheet
 var sheet;
+
+// References to the different music tracks that will fade in and out throughout the
+// game
+var backgroundmusic;
+var build1;
+var build2;
+var build3;
+var build4;
+var deathsong;
+
 
 // The current time, used for particles
 var elapsed = Date.now();
@@ -213,14 +224,60 @@ function initializeSprites()
   helpButton.on('click', loadHelp );
 
   title.addChild(helpButton);
-    // Background Sound
-    PIXI.sound.Sound.from({
-        url: "Assets/backgroundmusic.wav",
-        preload: true,
-        autoPlay: true,
-        loop: true,
-        volume: 0.03,
-    });
+
+  // Initialize the soun for the game
+
+  // Background Sound
+  backgroundmusic = PIXI.sound.Sound.from({
+      url: "Assets/backgroundmusic.wav",
+      volume: 0.1,
+      preload: true,
+      autoPlay: true,
+      loop: true
+  });
+
+  // // build1 - drums
+  build1 = PIXI.sound.Sound.from({
+      url: "Assets/Build1.wav",
+      volume: 0.0,
+      preload: true,
+      autoPlay: true,
+      loop: true
+  });
+
+  // build2 - the bass line
+  build2 = PIXI.sound.Sound.from({
+      url: "Assets/Build2.wav",
+      volume: 0.0,
+      preload: true,
+      autoPlay: true,
+      loop: true
+  });
+
+  // build3 - the counter melody
+  build3 = PIXI.sound.Sound.from({
+      url: "Assets/Build3.wav",
+      volume: 0.0,
+      preload: true,
+      autoPlay: true,
+      loop: true
+  });
+
+  // build4 - the melody
+  build4 = PIXI.sound.Sound.from({
+      url: "Assets/Build4.wav",
+      volume: 0.0,
+      preload: true,
+      autoPlay: true,
+      loop: true
+  });
+
+  // death song
+  deathsong = PIXI.sound.Sound.from({
+      url: "Assets/DeathSong.wav",
+      preload: true,
+      volume: 0.05
+  });
 
   //Start our game loop
   gameLoop();
@@ -239,6 +296,7 @@ function gameLoop()
     {
       movePlayer();
       playerRhythm();
+      fadeSong();
       moveSnakes();
       moveCobras();
       moveSpit();

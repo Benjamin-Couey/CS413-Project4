@@ -76,7 +76,7 @@ function bound( sprite )
         changeWorld("map3.json");
         mapState = "Map3";
         break;
-		
+
 		case "Map3":
         changeWorld("map.json");
         mapState = "Map1";
@@ -97,7 +97,7 @@ function bound( sprite )
         changeWorld("map3.json");
         mapState = "Map3";
         break;
-		
+
 		case "Map3":
         changeWorld("map.json");
         mapState = "Map1";
@@ -118,7 +118,7 @@ function bound( sprite )
         changeWorld("map3.json");
         mapState = "Map3";
         break;
-		
+
 		case "Map3":
         changeWorld("map.json");
         mapState = "Map1";
@@ -139,7 +139,7 @@ function bound( sprite )
         changeWorld("map3.json");
         mapState = "Map3";
         break;
-		
+
 		case "Map3":
         changeWorld("map.json");
         mapState = "Map1";
@@ -278,32 +278,34 @@ function movePlayer()
 
 function playSong( note )
 {
-
-  console.log(player.rhythm);
   // Only play a note if done so in the right rythm
   if( player.rhythm < 15 )
   {
-    console.log("Player played on beat");
     switch( note )
     {
       case HKEY:
         player.stateM.playH();
+        player.playedNote = true;
+        build1.volume = 0.15;
       break;
       case JKEY:
         player.stateM.playJ();
+        player.playedNote = true;
+        build2.volume = 0.15;
       break;
       case KKEY:
         player.stateM.playK();
+        player.playedNote = true;
+        build3.volume = 0.15;
       break;
       case LKEY:
         // Song of Sleep - HKJL
         if( player.stateM.is( "HKJ") )
         {
-          // Call song of sleep function
-          console.log("Song of sleep");
           songOfSleep();
         }
         player.stateM.playL();
+        player.playingSong = true;
       break;
     }
     console.log( player.stateM.current );
@@ -312,10 +314,8 @@ function playSong( note )
   // Otherwise, reset player's song for palying offbeat
   else
   {
-    console.log("Player played offbeat");
     player.stateM.offbeat();
   }
-
 }
 
 function playerRhythm()
@@ -338,6 +338,32 @@ function playerRhythm()
   if( player.rhythm >= 30 )
   {
     player.rhythm = 0;
+
+    // If the player didn't play a note this cycle reset their song
+    if( !player.playedNote )
+    {
+      player.stateM.offbeat();
+      // If the player hasn't already played a song, silence the music
+      if( !player.playingSong )
+      {
+        silenceMusic();
+      }
+    }
+
+    player.playedNote = false;
+
+  }
+}
+
+function fadeSong()
+{
+  player.songCounter -= 1;
+
+  // Once the song had run out, cut the melody
+  if( player.songCounter <= 0 )
+  {
+    player.playingSong = false;
+    build4.volume = 0;
   }
 }
 
@@ -374,7 +400,6 @@ function songOfSleep()
 
   }
 
-  // Check if player has collided with a cobra
   for( let index = 0; index < cobras.length; index++)
   {
     var cobra = cobras[ index ];
@@ -389,6 +414,10 @@ function songOfSleep()
       cobra.stateM.fallAsleep();
     }
   }
+
+  // Change the music that is playing by fading in build 2 and 4
+  build4.volume = 0.1;
+  player.songCounter = 8 * 60;
 }
 
 function moveSnakes()

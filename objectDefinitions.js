@@ -60,7 +60,14 @@ function loadPlayer()
       {name: 'playJ', from: 'HKJ', to: 'none'},
       {name: 'playL', from: 'HKJ', to: 'none'},
       {name: 'offbeat', from: 'HKJ', to: 'none'}
-    ]
+    ],
+  methods: {
+     onPlayH: function() {  if( this.is('H') ){ build1.volume = 0.1; } },
+     onPlayK: function() {  if( this.is('HK') ){ build2.volume = 0.1; } },
+     onPlayJ: function() {  if( this.is('HKJ') ){ build3.volume = 0.1; } },
+     onPlayL: function() {   },
+     onOffbeat: function() { silenceMusic() }
+   }
   });
 
   // Instance variables
@@ -68,6 +75,9 @@ function loadPlayer()
   this.vy = 0;
   this.moving = false;
   this.rhythm = 0;
+  this.playedNote = false;
+  this.playingSong = false;
+  this.songCounter = 0;
 }
 
 function snakeInit()

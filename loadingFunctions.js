@@ -16,6 +16,8 @@ function loadTitle()
   world.visible = false;
   gameover.visible = false;
   gameState = TITLE;
+
+	silenceMusic();
 }
 
 function loadHelp()
@@ -27,6 +29,8 @@ function loadHelp()
   world.visible = false;
   gameover.visible = false;
   gameState = HELP;
+
+	silenceMusic();
 }
 
 function loadGame()
@@ -48,6 +52,10 @@ function loadGameOver()
   game.visible = false;
   gameover.visible = true;
   gameState = OVER;
+
+	silenceMusic();
+
+	deathsong.play();
 }
 
 function changeWorld(name)

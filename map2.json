@@ -6,7 +6,7 @@
          "name":"Floor",
          "opacity":0.990000009536743,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":60,
          "x":0,
          "y":0
