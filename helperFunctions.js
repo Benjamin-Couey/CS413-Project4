@@ -19,3 +19,13 @@ function existsInWorld( objectName )
   }
   return false;
 }
+
+// Sets the volume of all build tracks to 0, leaving only the basic background music
+// for menues and the game over screen
+function silenceMusic()
+{
+ build1.volume = 0;
+ build2.volume = 0;
+ build3.volume = 0;
+ build4.volume = 0;
+}
