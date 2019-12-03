@@ -66,16 +66,6 @@ var collidableArray;
 // A reference to the spritesheet
 var sheet;
 
-// References to the different music tracks that will fade in and out throughout the
-// game
-var backgroundmusic;
-var build1;
-var build2;
-var build3;
-var build4;
-var deathsong;
-
-
 // The current time, used for particles
 var elapsed = Date.now();
 var songOfSleepEmitter;
@@ -151,8 +141,8 @@ gameoverSprite.on('click', resetGame );
 
 gameover.addChild(gameoverSprite);
 
-console.log("Finish container definition");
 
+console.log("Finish container definition");
 
 
 // -------------------- Initialization --------------------
@@ -167,7 +157,8 @@ PIXI.loader.add("Assets.json")
             .add("map2.json")
 			.add("map3.json")
             .add("tileset.png")
-            .load( initializeSprites );
+    .load(initializeSprites);
+
 
 // Create the sprites that will be used in every biome
 // The large title, help, and game over screen sprites are bigger than this whole
@@ -218,61 +209,15 @@ function initializeSprites()
 
   helpButton.on('click', loadHelp );
 
-  title.addChild(helpButton);
+    title.addChild(helpButton);
 
-  // Initialize the soun for the game
-
-  // Background Sound
-  backgroundmusic = PIXI.sound.Sound.from({
-      url: "Assets/backgroundmusic.wav",
-      volume: 0.1,
-      preload: true,
-      autoPlay: true,
-      loop: true
-  });
-
-  // // build1 - drums
-  build1 = PIXI.sound.Sound.from({
-      url: "Assets/Build1.wav",
-      volume: 0.0,
-      preload: true,
-      autoPlay: true,
-      loop: true
-  });
-
-  // build2 - the bass line
-  build2 = PIXI.sound.Sound.from({
-      url: "Assets/Build2.wav",
-      volume: 0.0,
-      preload: true,
-      autoPlay: true,
-      loop: true
-  });
-
-  // build3 - the counter melody
-  build3 = PIXI.sound.Sound.from({
-      url: "Assets/Build3.wav",
-      volume: 0.0,
-      preload: true,
-      autoPlay: true,
-      loop: true
-  });
-
-  // build4 - the melody
-  build4 = PIXI.sound.Sound.from({
-      url: "Assets/Build4.wav",
-      volume: 0.0,
-      preload: true,
-      autoPlay: true,
-      loop: true
-  });
-
-  // death song
-  deathsong = PIXI.sound.Sound.from({
-      url: "Assets/DeathSong.wav",
-      preload: true,
-      volume: 0.05
-  });
+    PIXI.sound.Sound.from({
+        url: "Assets/backgroundmusic.wav",
+        preload: true,
+        autoPlay: true,
+        loop: true,
+        volume: 0.03,
+    });
 
   //Start our game loop
   gameLoop();
@@ -289,7 +234,6 @@ function gameLoop()
     {
       movePlayer();
       playerRhythm();
-      fadeSong();
       moveSnakes();
       moveCobras();
       moveSpit();

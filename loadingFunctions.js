@@ -16,8 +16,6 @@ function loadTitle()
   world.visible = false;
   gameover.visible = false;
   gameState = TITLE;
-
-	silenceMusic();
 }
 
 function loadHelp()
@@ -29,8 +27,6 @@ function loadHelp()
   world.visible = false;
   gameover.visible = false;
   gameState = HELP;
-
-	silenceMusic();
 }
 
 function loadGame()
@@ -52,26 +48,22 @@ function loadGameOver()
   game.visible = false;
   gameover.visible = true;
   gameState = OVER;
-
-	silenceMusic();
-
-	deathsong.play();
 }
 
 function changeWorld(name)
 {
   //Get a reference to the tile map and add it to the stage
+  
+  //Remove current world if there is one
 
-  //Remove curretn world if there is one
-
-	game.removeChild(world);
-
-
+    stage.removeChild(world);
+ 
+  
   console.log("World parameters");
   console.log( name );
 
   world = tu.makeTiledWorld(name, "tileset.png");
-
+  
   //Log the new world
   console.log( world );
   console.log( world.tilewidth );
@@ -96,10 +88,10 @@ function changeWorld(name)
 
   //Add in the collidable objects to our collision array
   collidableArray = world.getObject("WallsLayer").data;
-
+  
   //Add in emmiters for the songs
   songOfSleepEmitter = createSongEmitter("SLEEP");
-
+  
   // Add enemies to map's entity layer
   snakeInit();
   cobraInit();
