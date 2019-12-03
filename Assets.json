@@ -2,7 +2,7 @@
 
 "8thnote.png":
 {
-	"frame": {"x":39,"y":0,"w":16,"h":16},
+	"frame": {"x":0,"y":0,"w":16,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":16,"h":16},
@@ -10,23 +10,15 @@
 },
 "8thnotes.png":
 {
-	"frame": {"x":55,"y":0,"w":20,"h":16},
+	"frame": {"x":16,"y":0,"w":20,"h":16},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":20,"h":16},
 	"sourceSize": {"w":20,"h":16}
 },
-"barrier.png":
-{
-	"frame": {"x":96,"y":88,"w":40,"h":40},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":40},
-	"sourceSize": {"w":40,"h":40}
-},
 "BeatMarker.png":
 {
-	"frame": {"x":32,"y":88,"w":32,"h":32},
+	"frame": {"x":36,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -34,7 +26,7 @@
 },
 "CobraBody.png":
 {
-	"frame": {"x":75,"y":0,"w":20,"h":20},
+	"frame": {"x":68,"y":0,"w":20,"h":20},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":20,"h":20},
@@ -42,7 +34,7 @@
 },
 "CobraHead.png":
 {
-	"frame": {"x":26,"y":0,"w":13,"h":14},
+	"frame": {"x":88,"y":0,"w":13,"h":14},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":13,"h":14},
@@ -50,7 +42,7 @@
 },
 "CobraSpit.png":
 {
-	"frame": {"x":9,"y":0,"w":17,"h":6},
+	"frame": {"x":101,"y":0,"w":17,"h":6},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":17,"h":6},
@@ -58,7 +50,7 @@
 },
 "HelpButton.png":
 {
-	"frame": {"x":0,"y":128,"w":65,"h":38},
+	"frame": {"x":118,"y":0,"w":65,"h":38},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":65,"h":38},
@@ -66,7 +58,7 @@
 },
 "Notes1.png":
 {
-	"frame": {"x":160,"y":56,"w":32,"h":32},
+	"frame": {"x":183,"y":0,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -74,7 +66,7 @@
 },
 "Notes2.png":
 {
-	"frame": {"x":0,"y":88,"w":32,"h":32},
+	"frame": {"x":0,"y":38,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -82,7 +74,7 @@
 },
 "Notes3.png":
 {
-	"frame": {"x":96,"y":56,"w":32,"h":32},
+	"frame": {"x":32,"y":38,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -90,7 +82,7 @@
 },
 "Notes4.png":
 {
-	"frame": {"x":82,"y":24,"w":32,"h":32},
+	"frame": {"x":64,"y":38,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -98,7 +90,7 @@
 },
 "PlayerBody1.png":
 {
-	"frame": {"x":0,"y":24,"w":18,"h":24},
+	"frame": {"x":96,"y":38,"w":18,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
@@ -106,7 +98,7 @@
 },
 "PlayerBody2.png":
 {
-	"frame": {"x":167,"y":0,"w":18,"h":24},
+	"frame": {"x":114,"y":38,"w":18,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
@@ -114,7 +106,7 @@
 },
 "PlayerBody3.png":
 {
-	"frame": {"x":95,"y":0,"w":18,"h":24},
+	"frame": {"x":132,"y":38,"w":18,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
@@ -122,7 +114,7 @@
 },
 "PlayerBody4.png":
 {
-	"frame": {"x":113,"y":0,"w":18,"h":24},
+	"frame": {"x":150,"y":38,"w":18,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
@@ -130,7 +122,7 @@
 },
 "PlayerBody5.png":
 {
-	"frame": {"x":185,"y":0,"w":18,"h":24},
+	"frame": {"x":168,"y":38,"w":18,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
@@ -138,7 +130,7 @@
 },
 "PlayerBody6.png":
 {
-	"frame": {"x":203,"y":0,"w":18,"h":24},
+	"frame": {"x":186,"y":38,"w":18,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
@@ -146,7 +138,7 @@
 },
 "PlayerBody7.png":
 {
-	"frame": {"x":149,"y":0,"w":18,"h":24},
+	"frame": {"x":204,"y":38,"w":18,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
@@ -154,7 +146,7 @@
 },
 "PlayerBody8.png":
 {
-	"frame": {"x":131,"y":0,"w":18,"h":24},
+	"frame": {"x":222,"y":38,"w":18,"h":24},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":18,"h":24},
@@ -162,7 +154,7 @@
 },
 "SleepCobra.png":
 {
-	"frame": {"x":64,"y":88,"w":32,"h":32},
+	"frame": {"x":0,"y":70,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -170,7 +162,7 @@
 },
 "SleepParticle.png":
 {
-	"frame": {"x":0,"y":0,"w":9,"h":9},
+	"frame": {"x":32,"y":70,"w":9,"h":9},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":9,"h":9},
@@ -178,7 +170,7 @@
 },
 "SleepSnake.png":
 {
-	"frame": {"x":128,"y":56,"w":32,"h":32},
+	"frame": {"x":41,"y":70,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -186,7 +178,7 @@
 },
 "Snake1.png":
 {
-	"frame": {"x":146,"y":24,"w":32,"h":32},
+	"frame": {"x":73,"y":70,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -194,7 +186,7 @@
 },
 "Snake2.png":
 {
-	"frame": {"x":64,"y":56,"w":32,"h":32},
+	"frame": {"x":105,"y":70,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -202,7 +194,7 @@
 },
 "Snake3.png":
 {
-	"frame": {"x":50,"y":24,"w":32,"h":32},
+	"frame": {"x":137,"y":70,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -210,7 +202,7 @@
 },
 "Snake4.png":
 {
-	"frame": {"x":18,"y":24,"w":32,"h":32},
+	"frame": {"x":169,"y":70,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -218,7 +210,7 @@
 },
 "Snake5.png":
 {
-	"frame": {"x":114,"y":24,"w":32,"h":32},
+	"frame": {"x":201,"y":70,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -226,7 +218,7 @@
 },
 "Snake6.png":
 {
-	"frame": {"x":0,"y":56,"w":32,"h":32},
+	"frame": {"x":0,"y":102,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -234,7 +226,7 @@
 },
 "Snake7.png":
 {
-	"frame": {"x":32,"y":56,"w":32,"h":32},
+	"frame": {"x":32,"y":102,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
@@ -242,15 +234,23 @@
 },
 "Snake8.png":
 {
-	"frame": {"x":178,"y":24,"w":32,"h":32},
+	"frame": {"x":64,"y":102,"w":32,"h":32},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":32,"h":32},
 	"sourceSize": {"w":32,"h":32}
 },
+"SongOfSleepPickup.png":
+{
+	"frame": {"x":96,"y":102,"w":128,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":128,"h":128},
+	"sourceSize": {"w":128,"h":128}
+},
 "StartButton.png":
 {
-	"frame": {"x":136,"y":88,"w":75,"h":30},
+	"frame": {"x":0,"y":230,"w":75,"h":30},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":30},
@@ -258,7 +258,7 @@
 },
 "Title.png":
 {
-	"frame": {"x":65,"y":128,"w":147,"h":48},
+	"frame": {"x":75,"y":230,"w":147,"h":48},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":147,"h":48},
@@ -269,8 +269,8 @@
 	"version": "1.0",
 	"image": "Assets.png",
 	"format": "RGBA8888",
-	"size": {"w":221,"h":176},
+	"size": {"w":240,"h":278},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:33b42f7b9fd17d540ebfd24bd18d7d72:f998a9ec34cdcd6d9bb2f6b088a4ff8c:343a2cbedbd3a58ea401ebc8df9c4834$"
+	"smartupdate": "$TexturePacker:SmartUpdate:b87d1bba761e74ffd876ea42c08c7152:658cd85686db57bb30caf8bead8f9a41:343a2cbedbd3a58ea401ebc8df9c4834$"
 }
 }

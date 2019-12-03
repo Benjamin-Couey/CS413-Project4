@@ -37,16 +37,12 @@ var aDown = false;
 var sDown = false;
 var dDown = false;
 
-// var hDown = false;
-// var jDown = false;
-// var kDown = false;
-// var lDown = false;
-
 // global arrays to store references to game Objects
 // these will be filled, emptied, and modified as new screens are loaded
 var player;
-
+var songOfSleepPickup;
 var beatCounter;
+
 
 var snakes = [];
 var cobras = [];
@@ -281,8 +277,6 @@ function initializeSprites()
   //Start our game loop
   gameLoop();
 }
-
-//songOfSleepEmitter.emit = true;
 
 // -------------------- Main game loop --------------------
 function gameLoop()

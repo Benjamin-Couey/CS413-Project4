@@ -82,15 +82,15 @@ function loadPlayer()
 
 function snakeInit()
 {
+  // Clear the snakes array
+  snakes = [];
+
   // Only initialize cobras if there are cobras on the map
   if( existsInWorld( "Snake" ) )
   {
     // Get an array of references to all the snake objects in the entities layer
     // of the map
     var stgSnake = world.getObjects("Snake");
-
-    // Clear the snakes array
-    snakes = [];
 
     // For each of these references, create a snake object, position it on the
     // map based on the reference, push it to the array, and add it to the entity layer
@@ -156,15 +156,15 @@ function snake( mapPosition )
 
 function cobraInit()
 {
+  // Clear the cobras array
+  cobras = [];
+
   // Only initialize cobras if there are cobras on the map
   if( existsInWorld( "Cobra" ) )
   {
     // Get an array of references to all the snake objects in the entities layer
     // of the map
     var stgCobra = world.getObjects("Cobra");
-
-    // Clear the snakes array
-    cobras = [];
 
     // For each of these references, create a snake object, position it on the
     // map based on the reference, push it to the array, and add it to the entity layer
@@ -250,4 +250,32 @@ function spit( startingX, startingY, rotation )
 
   this.spit.x = this.sprite.x + this.sprite.width / 2;
   this.spit.y = this.sprite.y + this.sprite.height / 2;
+}
+
+function songOfSleepInit()
+{
+  // Only initialize song of sleep pickup if it is on the map
+  if( existsInWorld( "SongOfSleep" ) )
+  {
+    // Get an array of references to all the snake objects in the entities layer
+    // of the map
+    var stgSong = world.getObject("SongOfSleep");
+
+    // Create the song
+    songOfSleepPickup = new songOfSleepPickup( stgSong );
+
+    // Add song's sprite to the map
+    entity_layer.addChild( newSong.sprite );
+  }
+}
+
+function songOfSleepPickup( mapPosition )
+{
+  // Create the song's visible body
+  console.log("Sprite definition");
+  this.sprite = new PIXI.Sprite( sheet.textures["SongOfSleepPickup.png"] );
+  this.sprite.anchor.set(0.5);
+
+  this.sprite.x = mapPosition.x;
+  this.sprite.y = mapPosition.y;
 }

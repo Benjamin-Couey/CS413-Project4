@@ -103,6 +103,7 @@ function changeWorld(name)
   // Add enemies to map's entity layer
   snakeInit();
   cobraInit();
+	songOfSleepInit();
 
 }
 

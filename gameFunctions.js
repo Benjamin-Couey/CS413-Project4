@@ -287,22 +287,33 @@ function playSong( note )
         player.stateM.playH();
         player.playedNote = true;
         build1.volume = 0.15;
+        songOfSleepEmitter.updateSpawnPos( player.sprite.x, player.sprite.y );
+        songOfSleepEmitter.resetPositionTracking();
+        songOfSleepEmitter.emit = true;
       break;
       case JKEY:
         player.stateM.playJ();
         player.playedNote = true;
         build2.volume = 0.15;
+        songOfSleepEmitter.updateSpawnPos( player.sprite.x, player.sprite.y );
+        songOfSleepEmitter.resetPositionTracking();
+        songOfSleepEmitter.emit = true;
       break;
       case KKEY:
         player.stateM.playK();
         player.playedNote = true;
         build3.volume = 0.15;
+        songOfSleepEmitter.updateSpawnPos( player.sprite.x, player.sprite.y );
+        songOfSleepEmitter.resetPositionTracking();
+        songOfSleepEmitter.emit = true;
       break;
       case LKEY:
         // Song of Sleep - HKJL
         if( player.stateM.is( "HKJ") )
         {
-          songOfSleep();
+
+            songOfSleep();
+
         }
         player.stateM.playL();
         player.playingSong = true;
