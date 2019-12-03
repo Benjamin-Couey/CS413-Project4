@@ -55,10 +55,9 @@ function changeWorld(name)
   //Get a reference to the tile map and add it to the stage
   
   //Remove curretn world if there is one
-  if(world)
-  {
+
 	  stage.removeChild(world);
-  }
+ 
   
   console.log("World parameters");
   console.log( name );

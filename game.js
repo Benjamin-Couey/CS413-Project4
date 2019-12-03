@@ -59,7 +59,7 @@ var tu;
 var world;
 
 // A reference to the map state
-var mapState = "Map0";
+var mapState = "Map1";
 
 // A reference to a layer for entites
 var entity_layer;
@@ -159,6 +159,7 @@ PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST;
 PIXI.loader.add("Assets.json")
             .add("map.json")
             .add("map2.json")
+			.add("map3.json")
             .add("tileset.png")
             .load( initializeSprites );
 
