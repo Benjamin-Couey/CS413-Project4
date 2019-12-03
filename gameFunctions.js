@@ -67,14 +67,19 @@ function bound( sprite )
     sprite.position.x = sprite.anchor.x * 32;
     switch(mapState)
     {
-        case "Map0":
+        case "Map1":
         changeWorld("map2.json");
-        mapState = "Map1";
+        mapState = "Map2";
         break;
 
-        case "Map1":
+        case "Map2":
+        changeWorld("map3.json");
+        mapState = "Map3";
+        break;
+		
+		case "Map3":
         changeWorld("map.json");
-        mapState = "Map0";
+        mapState = "Map1";
         break;
     }
   }
@@ -83,14 +88,19 @@ function bound( sprite )
     sprite.position.x = world.worldWidth - sprite.anchor.x * 32;
     switch(mapState)
     {
-        case "Map0":
+        case "Map1":
         changeWorld("map2.json");
-        mapState = "Map1";
+        mapState = "Map2";
         break;
 
-        case "Map1":
+        case "Map2":
+        changeWorld("map3.json");
+        mapState = "Map3";
+        break;
+		
+		case "Map3":
         changeWorld("map.json");
-        mapState = "Map0";
+        mapState = "Map1";
         break;
     }
   }
@@ -99,14 +109,19 @@ function bound( sprite )
     sprite.position.y = sprite.anchor.y * 32;
     switch(mapState)
     {
-        case "Map0":
+        case "Map1":
         changeWorld("map2.json");
-        mapState = "Map1";
+        mapState = "Map2";
         break;
 
-        case "Map1":
+        case "Map2":
+        changeWorld("map3.json");
+        mapState = "Map3";
+        break;
+		
+		case "Map3":
         changeWorld("map.json");
-        mapState = "Map0";
+        mapState = "Map1";
         break;
     }
   }
@@ -115,18 +130,24 @@ function bound( sprite )
     sprite.position.y = world.worldHeight - sprite.anchor.y * 32;
     switch(mapState)
     {
-        case "Map0":
+        case "Map1":
         changeWorld("map2.json");
-        mapState = "Map1";
+        mapState = "Map2";
         break;
 
-        case "Map1":
+        case "Map2":
+        changeWorld("map3.json");
+        mapState = "Map3";
+        break;
+		
+		case "Map3":
         changeWorld("map.json");
-        mapState = "Map0";
+        mapState = "Map1";
         break;
     }
   }
 }
+
 
 function boundObjects()
 {
