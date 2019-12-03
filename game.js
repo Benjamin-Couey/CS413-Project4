@@ -1,8 +1,7 @@
 // -------------------- Define Constants --------------------
 
 // Keycodes
-//const WKEY = 87;
-const WKEY = 50;
+const WKEY = 87;
 const AKEY = 65;
 const SKEY = 83;
 const DKEY = 68;
